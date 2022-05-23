@@ -9,26 +9,29 @@
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-    <bean id="classicalMusic"
-          class="org.example.ClassicalMusic">
-    </bean>
-    <bean id="popMusic"
-          class="org.example.PopMusic">
-    </bean>
-    <bean id="rockMusic"
-          class="org.example.RockMusic">
-    </bean>
-    <bean id="musicPlayer"
-          class="org.example.MusicPlayer">
-        <property name="musicList">
-            <list>
-                <ref bean="classicalMusic"/>
-                <ref bean="popMusic"/>
-                <ref bean="rockMusic"/>
-            </list>
-        </property>
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
+    <context:component-scan base-package="org.example"/>
+<!--    <bean id="classicalMusic"-->
+<!--          class="org.example.ClassicalMusic"-->
+<!--    init-method="doInit"-->
+<!--    destroy-method="doDestroy">-->
+<!--    </bean>-->
+<!--    <bean id="popMusic"-->
+<!--          class="org.example.PopMusic">-->
+<!--    </bean>-->
+<!--    <bean id="rockMusic"-->
+<!--          class="org.example.RockMusic">-->
+<!--    </bean>-->
+<!--    <bean id="musicPlayer"-->
+<!--          class="org.example.MusicPlayer">-->
+<!--        <property name="musicList">-->
+<!--            <list>-->
+<!--                <ref bean="classicalMusic"/>-->
+<!--                <ref bean="popMusic"/>-->
+<!--                <ref bean="rockMusic"/>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--        <property name="name" value="${musicPlayer.name}"/>-->
+<!--        <property name="volume" value="${musicPlayer.volume}"/>-->
+<!--    </bean>-->
 
 </beans>

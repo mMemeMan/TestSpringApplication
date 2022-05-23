@@ -1,48 +1,43 @@
 package org.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class MusicPlayer {
-    private List<Music> musicList = new ArrayList();
+    private ClassicalMusic classicalMusic;
+    private PopMusic popMusic;
+    private RockMusic rockMusic;
 
-    private String name;
-    private int volume;
-
-    public MusicPlayer(List<Music> musicList){
-        this.musicList = musicList;
+    @Autowired
+    public MusicPlayer(ClassicalMusic classicalMusic, PopMusic popMusic, RockMusic rockMusic) {
+        this.classicalMusic = classicalMusic;
+        this.popMusic = popMusic;
+        this.rockMusic = rockMusic;
     }
 
     public MusicPlayer() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
-    }
-
-    public List<Music> getMusicList() {
-        return musicList;
-    }
-
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
-    public void playMusic(){
-        for (Music music : musicList) {
-            System.out.println("Play music: " + music.getSong());
+    public void playMusic(GenreOfMusic genreOfMusic) {
+        String music = "";
+        ArrayList<String> musicList;
+        switch (genreOfMusic) {
+            case CLASSICAl:
+                musicList = classicalMusic.getSongs();
+                music = musicList.get((int) (Math.random() * musicList.size()));
+                break;
+            case POP:
+                musicList = popMusic.getSongs();
+                music = musicList.get((int) (Math.random() * musicList.size()));
+                break;
+            case ROCK:
+                musicList = rockMusic.getSongs();
+                music = musicList.get((int) (Math.random() * musicList.size()));
         }
+        System.out.println("Playing: " + music);
     }
 }
